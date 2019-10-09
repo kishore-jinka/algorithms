@@ -1,21 +1,11 @@
 package com.algorithms.recursion;
 
-import java.util.List;
-
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
 public class SwapLinkedListNodePairs {
-    public ListNode swapPairs(ListNode head) {
+    public ListNodeLeetCode swapPairs(ListNodeLeetCode head) {
         if(head != null && head.next != null){
-            ListNode node1 = head;
-            ListNode node2 = node1.next;
-            ListNode node3 = node2.next;
+            ListNodeLeetCode node1 = head;
+            ListNodeLeetCode node2 = node1.next;
+            ListNodeLeetCode node3 = node2.next;
             head = node2;
             head.next = node1;
             node1.next = swapPairs(node3);
@@ -23,18 +13,17 @@ public class SwapLinkedListNodePairs {
         return head;
     }
 
-
     public static void main(String[] args){
-        ListNode listNode1 = new ListNode(1);
-        ListNode listNode2 = new ListNode(2);
-        ListNode listNode3 = new ListNode(3);
-        ListNode listNode4 = new ListNode(4);
+        ListNodeLeetCode listNode1 = new ListNodeLeetCode(1);
+        ListNodeLeetCode listNode2 = new ListNodeLeetCode(2);
+        ListNodeLeetCode listNode3 = new ListNodeLeetCode(3);
+        ListNodeLeetCode listNode4 = new ListNodeLeetCode(4);
         listNode1.next = listNode2;
         listNode2.next = listNode3;
         listNode3.next = listNode4;
         SwapLinkedListNodePairs swapLinkedListNodePairs = new SwapLinkedListNodePairs();
-        ListNode swappedPairsLL = swapLinkedListNodePairs.swapPairs(listNode1);
-        ListNode currentNode = swappedPairsLL;
+        ListNodeLeetCode swappedPairsLL = swapLinkedListNodePairs.swapPairs(listNode1);
+        ListNodeLeetCode currentNode = swappedPairsLL;
         while(currentNode != null){
             System.out.println(currentNode.val);
             currentNode = currentNode.next;
@@ -42,21 +31,10 @@ public class SwapLinkedListNodePairs {
     }
 }
 
-class ListNode{
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
-}
-
-
 /*
 Given a linked list, swap every two adjacent nodes and return its head.
-
 You may not modify the values in the list's nodes, only nodes itself may be changed.
 
-
-
 Example:
-
 Given 1->2->3->4, you should return the list as 2->1->4->3.
  */
