@@ -1,11 +1,11 @@
 package com.algorithms.recursion;
 
 public class SwapLinkedListNodePairs {
-    public ListNodeLeetCode swapPairs(ListNodeLeetCode head) {
+    public ListNode swapPairs(ListNode head) {
         if(head != null && head.next != null){
-            ListNodeLeetCode node1 = head;
-            ListNodeLeetCode node2 = node1.next;
-            ListNodeLeetCode node3 = node2.next;
+            ListNode node1 = head;
+            ListNode node2 = node1.next;
+            ListNode node3 = node2.next;
             head = node2;
             head.next = node1;
             node1.next = swapPairs(node3);
@@ -14,16 +14,16 @@ public class SwapLinkedListNodePairs {
     }
 
     public static void main(String[] args){
-        ListNodeLeetCode listNode1 = new ListNodeLeetCode(1);
-        ListNodeLeetCode listNode2 = new ListNodeLeetCode(2);
-        ListNodeLeetCode listNode3 = new ListNodeLeetCode(3);
-        ListNodeLeetCode listNode4 = new ListNodeLeetCode(4);
+        ListNode listNode1 = new ListNode(1);
+        ListNode listNode2 = new ListNode(2);
+        ListNode listNode3 = new ListNode(3);
+        ListNode listNode4 = new ListNode(4);
         listNode1.next = listNode2;
         listNode2.next = listNode3;
         listNode3.next = listNode4;
         SwapLinkedListNodePairs swapLinkedListNodePairs = new SwapLinkedListNodePairs();
-        ListNodeLeetCode swappedPairsLL = swapLinkedListNodePairs.swapPairs(listNode1);
-        ListNodeLeetCode currentNode = swappedPairsLL;
+        ListNode swappedPairsLL = swapLinkedListNodePairs.swapPairs(listNode1);
+        ListNode currentNode = swappedPairsLL;
         while(currentNode != null){
             System.out.println(currentNode.val);
             currentNode = currentNode.next;

@@ -2,22 +2,34 @@ package com.algorithms.recursion;
 
 
 public class ReverseLinkedList {
-    public ListNodeLeetCode reverseList(ListNodeLeetCode head) {
-        ListNodeLeetCode lastNode = head;
+    public ListNode reverseList(ListNode head) {
+        if(head == null) return null;
+        ListNode leftHeadNode = head;
+        ListNode rightHeadNode = head.next;
+        leftHeadNode.next = null;
+        return reverseLinkedList(leftHeadNode, rightHeadNode);
+    }
 
-        return head;
+    private ListNode reverseLinkedList(ListNode leftHeadNode, ListNode rightHeadNode){
+        if(rightHeadNode == null){
+            return leftHeadNode;
+        }
+        ListNode newLeftHeadNode = rightHeadNode;
+        ListNode newRightHeadNode = rightHeadNode.next;
+        newLeftHeadNode.next = leftHeadNode;
+        return reverseLinkedList(newLeftHeadNode, newRightHeadNode);
     }
 
     public static void main(String[] args){
-        ListNodeLeetCode listNode1 = new ListNodeLeetCode(1);
-        ListNodeLeetCode listNode2 = new ListNodeLeetCode(2);
-        ListNodeLeetCode listNode3 = new ListNodeLeetCode(3);
-        ListNodeLeetCode listNode4 = new ListNodeLeetCode(4);
+        ListNode listNode1 = new ListNode(1);
+        ListNode listNode2 = new ListNode(2);
+        ListNode listNode3 = new ListNode(3);
+        ListNode listNode4 = new ListNode(4);
         listNode1.next = listNode2;
         listNode2.next = listNode3;
         listNode3.next = listNode4;
         ReverseLinkedList reverseLinkedList = new ReverseLinkedList();
-        ListNodeLeetCode headNode = reverseLinkedList.reverseList(listNode1);
+        ListNode headNode = reverseLinkedList.reverseList(listNode1);
         while(headNode != null){
             System.out.println(headNode.val);
             headNode = headNode.next;
