@@ -16,7 +16,7 @@ public class SubsetsOfUniqueNumberSet {
     static void generateAllSubsetsRecursive(int index, List<Integer> integerList, String currentString, List<String> subsetList){
         subsetList.add(currentString);
         for(int i = index; i < integerList.size(); i++){
-            currentString = currentString + "," + integerList.get(i);
+            currentString = currentString  + integerList.get(i);
             generateAllSubsetsRecursive(i + 1, integerList, currentString, subsetList);
             currentString = currentString.substring(0, currentString.length() - 1);
         }
