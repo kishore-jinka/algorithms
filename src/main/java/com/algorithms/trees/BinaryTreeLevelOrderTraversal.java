@@ -5,27 +5,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class BinaryTreeBFS {
+/**
+ * 102. Binary Tree Level Order Traversal
+ * https://leetcode.com/problems/binary-tree-level-order-traversal/
+ */
+public class BinaryTreeLevelOrderTraversal {
 
-    public List<Integer> traverseLevelOrder(TreeNode rootNode){
+    public List<List<Integer>> levelOrder(TreeNode root){
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
-        if(rootNode == null) return null;
-        queue.add(rootNode);
-        List<Integer> list = new ArrayList<Integer>();
-        while(!queue.isEmpty()){
-            TreeNode node = queue.poll();
-            list.add(node.val);
-            if(node.left != null) queue.add(node.left);
-            if(node.right != null) queue.add(node.right);
-        }
-        return list;
-    }
-
-    public List<List<Integer>> traverseLevelOrder2(TreeNode rootNode){
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
-        if(rootNode == null) return null;
-        queue.add(rootNode);
         List<List<Integer>> list = new ArrayList<List<Integer>>();
+        if(root == null) return list;
+        queue.add(root);
         while(!queue.isEmpty()){
             int numberOfNodes = queue.size();
             List<Integer> internalList = new ArrayList<Integer>();
@@ -54,10 +44,8 @@ public class BinaryTreeBFS {
         node4.right = node6;
         node6.right = node7;
         node3.right = node5;
-        BinaryTreeBFS btBFS = new BinaryTreeBFS();
-        List<Integer> levelOrderedList = btBFS.traverseLevelOrder(node2);
-        //System.out.println(levelOrderedList);
-        List<List<Integer>> levelOrderedList2 = btBFS.traverseLevelOrder2(node2);
+        BinaryTreeLevelOrderTraversal btBFS = new BinaryTreeLevelOrderTraversal();
+        List<List<Integer>> levelOrderedList2 = btBFS.levelOrder(node2);
         System.out.println(levelOrderedList2);
     }
 }
