@@ -1,7 +1,12 @@
 package com.algorithms.trees;
 
-
-public class AllPathsOfATree {
+/**
+ * IK Recommended: BinaryTreePaths_IK
+ * Print All Paths of a Tree
+ * Given a binary tree. Returns all the paths from root to leaf of the tree.
+ * Each path will consist of a list of integer values denoting nodes traversed for that path
+ */
+public class BinaryTreePaths_IK {
 
     static void printAllPathsDFS(TreeNode root){
         String pathString = "";
