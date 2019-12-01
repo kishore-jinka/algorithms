@@ -1,10 +1,12 @@
 package com.algorithms.trees;
 
 /**
- * IK Recommended: BinaryTreePaths_IK
- * Print All Paths of a Tree
- * Given a binary tree. Returns all the paths from root to leaf of the tree.
- * Each path will consist of a list of integer values denoting nodes traversed for that path
+ * Name: Print All Paths of a Tree
+ * Description: Given a binary tree. Returns all the paths from root to leaf of the tree.
+ *              Each path will consist of a list of integer values denoting nodes traversed for that path
+ * Link: None
+ * Label: IK Practice Sheet
+ * Author: Kishore Jinka
  */
 public class BinaryTreePaths_IK {
 

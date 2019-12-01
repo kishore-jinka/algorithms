@@ -6,29 +6,28 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * Name: LeetCode 102. Binary Tree Level Order Traversal
- * Description:
- * Link: https://leetcode.com/problems/binary-tree-level-order-traversal/
+ * Name: LeetCode 515. Find Largest Value in Each Tree Row
+ * Description: Find the largest value in each row of a binary tree.
+ * Link: https://leetcode.com/problems/find-largest-value-in-each-tree-row/
  * Label: IK Recommended LeetCode
  * Author: Kishore Jinka
  */
-public class BinaryTreeLevelOrderTraversal {
-
-    public List<List<Integer>> levelOrder(TreeNode root){
+public class FindLargestValueInEachTreeRow {
+    public List<Integer> largestValues(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
-        List<List<Integer>> list = new ArrayList<List<Integer>>();
+        List<Integer> list = new ArrayList<Integer>();
         if(root == null) return list;
         queue.add(root);
         while(!queue.isEmpty()){
             int numberOfNodes = queue.size();
-            List<Integer> internalList = new ArrayList<Integer>();
+            int largestValue = Integer.MIN_VALUE;
             for(int i=0; i<numberOfNodes; i++){
                 TreeNode node = queue.poll();
-                internalList.add(node.val);
+                if(largestValue<node.val) largestValue = node.val;
                 if(node.left != null) queue.add(node.left);
                 if(node.right != null) queue.add(node.right);
             }
-            list.add(internalList);
+            list.add(largestValue);
         }
         return list;
     }
@@ -47,8 +46,8 @@ public class BinaryTreeLevelOrderTraversal {
         node4.right = node6;
         node6.right = node7;
         node3.right = node5;
-        BinaryTreeLevelOrderTraversal btBFS = new BinaryTreeLevelOrderTraversal();
-        List<List<Integer>> levelOrderedList2 = btBFS.levelOrder(node2);
-        System.out.println(levelOrderedList2);
+        FindLargestValueInEachTreeRow findLargestValueInEachTreeRow = new FindLargestValueInEachTreeRow();
+        List<Integer> largestValues = findLargestValueInEachTreeRow.largestValues(node2);
+        System.out.println(largestValues);
     }
 }

@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * 637. Average of Levels in Binary Tree
- * https://leetcode.com/problems/average-of-levels-in-binary-tree/
+ * Name: LeetCode 637. Average of Levels in Binary Tree
+ * Description:
+ * Link: https://leetcode.com/problems/average-of-levels-in-binary-tree/
+ * Label: IK Recommended LeetCode
+ * Author: Kishore Jinka
  */
 public class AverageOfLevelsInBinaryTree {
 

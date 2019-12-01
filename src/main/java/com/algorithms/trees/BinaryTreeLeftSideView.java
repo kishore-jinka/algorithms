@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * This problem is not asked in Leetcode.  But this is similar to 199.
- * 199. Binary Tree Right Side View
- * https://leetcode.com/problems/binary-tree-right-side-view/submissions/
+ * Name: Binary Tree Left Side View
+ * Description: This problem is not asked in Leetcode.  But this is similar to 199. Binary Tree Right Side View
+ * Link: None
+ * Label: None
+ * Author: Kishore Jinka
  */
 public class BinaryTreeLeftSideView {
     public List<Integer> leftSideView(TreeNode root) {
