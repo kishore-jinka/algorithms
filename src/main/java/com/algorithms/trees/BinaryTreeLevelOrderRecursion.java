@@ -1,6 +1,4 @@
-package com.algorithms.recursion;
-
-import com.algorithms.trees.TreeNode;
+package com.algorithms.trees;
 
 import java.util.ArrayList;
 import java.util.List;
