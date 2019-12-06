@@ -10,7 +10,6 @@ import java.util.Queue;
 public class CheckCompletenessOfBinaryTree {
     public boolean isCompleteTree(TreeNode root) {
         if(root == null) return false;
-        boolean isComplete = true;
         Queue<RankNode> queue = new LinkedList<RankNode>();
         int expectedRank = 1;
         queue.add(new RankNode(root,1));
@@ -29,7 +28,7 @@ public class CheckCompletenessOfBinaryTree {
             }
 
         }
-        return isComplete;
+        return true;
     }
 
     class RankNode{
