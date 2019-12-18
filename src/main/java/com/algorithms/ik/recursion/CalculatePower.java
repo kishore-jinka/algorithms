@@ -1,4 +1,4 @@
-package com.algorithms.leetcode.recursion;
+package com.algorithms.ik.recursion;
 
 public class CalculatePower {
     /*

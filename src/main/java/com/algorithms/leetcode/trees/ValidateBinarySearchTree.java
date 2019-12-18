@@ -1,9 +1,12 @@
-package com.algorithms.leetcode.recursion;
+package com.algorithms.leetcode.trees;
 
-import com.algorithms.leetcode.trees.TreeNode;
 
-//LeetCode passes 68/75 cases.  Something is wrong with the below code or LeetCode?
-public class BinarySearchTreeValidationRecursion {
+/**
+ * 98. Validate Binary Search Tree
+ * https://leetcode.com/problems/validate-binary-search-tree/
+ * LeetCode passes 68/75 cases.  Something is wrong with the below code or LeetCode?
+ */
+public class ValidateBinarySearchTree {
 
     public boolean isValidBST(TreeNode root) {
         if(root == null) return true;
@@ -31,7 +34,7 @@ public class BinarySearchTreeValidationRecursion {
         node4.right = node6;
         node6.right = node7;
         node3.right = node5;
-        BinarySearchTreeValidationRecursion bstvr = new BinarySearchTreeValidationRecursion();
+        ValidateBinarySearchTree bstvr = new ValidateBinarySearchTree();
         System.out.println(bstvr.isValidBST(node2));
     }
 

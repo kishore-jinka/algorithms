@@ -1,4 +1,4 @@
-package com.algorithms.leetcode.recursion;
+package com.algorithms.ik.recursion;
 
 import java.util.ArrayList;
 import java.util.Arrays;
