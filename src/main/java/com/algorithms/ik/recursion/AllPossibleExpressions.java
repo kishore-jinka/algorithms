@@ -1,9 +1,6 @@
 package com.algorithms.ik.recursion;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class AllPossibleExpressions {
 
@@ -12,7 +9,7 @@ public class AllPossibleExpressions {
      */
     static String[] generate_all_expressions(String s, long target) {
         List<String> stringList = new ArrayList<String>();
-        generateAllPossibilities(s, 0, s.length(), "", stringList, target);
+        generateRecursively(s, 0, s.length(), "", stringList, target);
         String[] stringsToReturn = new String[stringList.size()];
         for(int i=0; i<stringList.size(); i++){
             stringsToReturn[i] = stringList.get(i);
@@ -20,38 +17,37 @@ public class AllPossibleExpressions {
         return stringsToReturn;
     }
 
-    static void generateAllPossibilities(String s, int position, int length, String inFix, List<String> stringList, long target){
+    private static void generateRecursively(String s, int position, int length, String inFix, List<String> stringList, long target){
         if(position == length && matchToTarget(inFix, target)){
             stringList.add(inFix);
         }else if(position < length-1){
             String withNoOperator = inFix + s.charAt(position);
-            generateAllPossibilities(s, position+1, length, withNoOperator + "+", stringList, target);
-            generateAllPossibilities(s, position+1, length, withNoOperator + "*" , stringList, target);
-            generateAllPossibilities(s, position+1, length, withNoOperator + " ", stringList, target);
+            generateRecursively(s, position+1, length, withNoOperator + "+", stringList, target);
+            generateRecursively(s, position+1, length, withNoOperator + "*" , stringList, target);
+            generateRecursively(s, position+1, length, withNoOperator + "", stringList, target);
         }else if(position == length-1){
-            generateAllPossibilities(s, position+1, length, inFix + s.charAt(position), stringList, target);
+            generateRecursively(s, position+1, length, inFix + s.charAt(position), stringList, target);
         }
     }
 
-    static boolean matchToTarget(String inFix, long target){
-        Stack<Integer> stack = new Stack<Integer>();
-        stack.push(Integer.parseInt(inFix.substring(0,1)));
-//        for(int i=1; i<inFix.length(); i=i+2){
-//            String operator = inFix.substring(i,i+1);
-//            String number = inFix.substring(i,i+1);
-//
-//                if(s.equals("*")){
-//                    stack.pop()*
-//                }
-//                if(stack.peek() == '(' && c == ')'){
-//                    stack.pop();
-//                }else{
-//                    stack.push(c);
-//                }
-//            }
-//        }
-//        return stack.empty();
-        return true;
+    private static boolean matchToTarget(String inFix, long target){
+        StringTokenizer plusStringTokenizer = new StringTokenizer(inFix, "+");
+        long sum = 0;
+        while(plusStringTokenizer.hasMoreTokens()){
+            String plusToken = plusStringTokenizer.nextToken();
+            if(plusToken.indexOf("*") < 0){
+                sum = sum + Long.parseLong(plusToken);
+            }else{
+                StringTokenizer productTokenizer = new StringTokenizer(plusToken, "*");
+                long product = 1;
+                while(productTokenizer.hasMoreTokens()){
+                    String productToken = productTokenizer.nextToken();
+                    product = product * Long.parseLong(productToken);
+                }
+                sum = sum + product;
+            }
+        }
+        return target == sum;
     }
 
     public static void main(String[] args){
