@@ -11,22 +11,22 @@ public class WordBreak {
 
     public boolean wordBreak(String s, List<String> wordDict) {
         if(s == null) return false;
-        Boolean[] dp = new Boolean[s.length()];
-        dp[0] = wordDict.contains(s.substring(0,1));
-        for(int i=1; i<s.length(); i++){
-            int j=i;
+        Boolean[] dp = new Boolean[s.length()+1];
+        dp[0] = true;
+        for(int i=1; i<=s.length(); i++){
+            int j=i-1;
             dp[i] = false;
             while(j>=0){
                 if(j==0){
-                    dp[i] = wordDict.contains(s.substring(0, i + 1));
+                    dp[i] = wordDict.contains(s.substring(0, i));
                 }else {
-                    dp[i] = dp[j - 1] && wordDict.contains(s.substring(j, i + 1));
+                    dp[i] = dp[j] && wordDict.contains(s.substring(j, i));
                 }
                 if(dp[i]) break;
                 j--;
             }
         }
-        return dp[s.length()-1];
+        return dp[s.length()];
     }
 
     public static void main(String[] args){

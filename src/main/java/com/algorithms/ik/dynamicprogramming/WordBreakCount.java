@@ -1,6 +1,9 @@
 package com.algorithms.ik.dynamicprogramming;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WordBreakCount {
 
@@ -13,8 +16,63 @@ public class WordBreakCount {
      */
 
     public static int wordBreakCount(List<String> dictionary, String txt) {
-        // Write your code here
-        return 0;
+        if(txt == null) return 0;
+        Map<Integer,List<Integer>> startAndEndMap = new HashMap();
+        Boolean[] dp = new Boolean[txt.length()+1];
+        dp[0] = true;
+        for(int i=1; i<=txt.length(); i++){
+            int j=i-1;
+            dp[i] = false;
+            while(j>=0){
+                Boolean dpLocal = false;
+                if(j==0){
+                    dpLocal = dictionary.contains(txt.substring(0, i));
+                }else {
+                    dpLocal = dp[j] && dictionary.contains(txt.substring(j, i));
+                }
+                if(dpLocal){
+                    dp[i] = dpLocal;
+                    insertInMap(j,i,startAndEndMap);
+                }
+                j--;
+            }
+        }
+        Counter c = new Counter();
+        if(dp[txt.length()]){
+            countPossibleSegments(txt, 0, startAndEndMap, c);
+        }
+        Long l = c.counter;
+        Long i = 1000000007l;
+        l = l%i;
+        return l.intValue();
+        //return (c.counter%1000000007).intValue();
+    }
+
+    private static void insertInMap(Integer start, Integer end, Map<Integer,List<Integer>> startAndEndMap){
+        List<Integer> list = startAndEndMap.get(start);
+        if(list == null){
+            startAndEndMap.put(start, new ArrayList<Integer>());
+            list = startAndEndMap.get(start);
+        }
+        list.add(end);
+    }
+
+    private static void countPossibleSegments(String input, Integer startIndex, Map<Integer,List<Integer>> startAndEndMap, Counter c){
+        if(startAndEndMap.get(startIndex) == null){
+            if(startIndex == input.length()) {
+                c.counter++;
+            }
+            return;
+        }else{
+            List<Integer> endIndices = startAndEndMap.get(startIndex);
+            for(Integer endIndex : endIndices){
+                countPossibleSegments(input, endIndex, startAndEndMap, c);
+            }
+        }
+    }
+
+    private static class Counter{
+        long counter = 0;
     }
 }
 /*
