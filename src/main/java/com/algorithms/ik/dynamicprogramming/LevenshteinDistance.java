@@ -5,10 +5,29 @@ public class LevenshteinDistance {
      * Complete the levenshteinDistance function below.
      */
     static int levenshteinDistance(String strWord1, String strWord2) {
-        /*
-         * Write your code here.
-         */
-        return 0;
+        int[][] dp = new int[strWord2.length()+1][strWord1.length()+1];
+        dp[0][0] = 0;
+        for(int column=1; column<=strWord1.length(); column++){ //along row 0
+            dp[0][column] = column;
+        }
+        for(int row=1; row<=strWord2.length(); row++){ //along column 0
+            dp[row][0] = row;
+        }
+        for(int row=1; row<=strWord2.length(); row++){
+            for(int column=1; column<=strWord1.length(); column++){
+                if(strWord1.charAt(column-1) == strWord2.charAt(row-1)){
+                    dp[row][column] = dp[row-1][column-1];
+                }else{
+                    dp[row][column] = getMinimum(dp[row-1][column-1], dp[row-1][column], dp[row][column-1]) + 1;
+                }
+            }
+        }
+        return dp[strWord2.length()][strWord1.length()];
+    }
+
+    private static int getMinimum(int a, int b, int c){
+        int min = Math.min(a, b);
+        return Math.min(min, c);
     }
 }
 

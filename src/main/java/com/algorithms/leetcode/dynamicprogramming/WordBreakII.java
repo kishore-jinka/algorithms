@@ -34,44 +34,44 @@ public class WordBreakII {
                 j--;
             }
         }
+        System.out.println(startAndEndMap);
         List<String> finalList = new ArrayList<String>();
         if(dp[s.length()]){
-            constructStringList(s, 0, "", startAndEndMap, finalList);
+            constructStringList(s, s.length(), "", startAndEndMap, finalList);
         }
         return finalList;
     }
 
     private void insertInMap(Integer start, Integer end, Map<Integer,List<Integer>> startAndEndMap){
-        List<Integer> list = startAndEndMap.get(start);
+        List<Integer> list = startAndEndMap.get(end);
         if(list == null){
-            startAndEndMap.put(start, new ArrayList<Integer>());
-            list = startAndEndMap.get(start);
+            startAndEndMap.put(end, new ArrayList<Integer>());
+            list = startAndEndMap.get(end);
         }
-        list.add(end);
+        list.add(start);
     }
 
-   private void constructStringList(String input, Integer startIndex, String intermediate, Map<Integer,List<Integer>> startAndEndMap, List<String> finalList){
-        if(startAndEndMap.get(startIndex) == null){
-            if(startIndex == input.length()) {
-                finalList.add(intermediate.trim());
-            }
+   private void constructStringList(String input, Integer endIndex, String intermediate, Map<Integer,List<Integer>> startAndEndMap, List<String> finalList){
+        if(endIndex == 0){
+            finalList.add(intermediate.trim());
             return;
         }else{
-            List<Integer> endIndices = startAndEndMap.get(startIndex);
-            for(Integer endIndex : endIndices){
-                constructStringList(input, endIndex, intermediate + " " + input.substring(startIndex, endIndex), startAndEndMap, finalList);
+            List<Integer> startIndices = startAndEndMap.get(endIndex);
+            for(Integer startIndex : startIndices){
+                constructStringList(input, startIndex, input.substring(startIndex, endIndex) + " " + intermediate, startAndEndMap, finalList);
             }
         }
    }
 
     public static void main(String[] args){
         WordBreakII wb2 = new WordBreakII();
-        String s = "abcd";
+        String s = "catsanddog";
         List<String> wordDict = new ArrayList();
-        wordDict.add("a");
-        wordDict.add("abc");
-        wordDict.add("b");
-        wordDict.add("cd");
+        wordDict.add("cat");
+        wordDict.add("cats");
+        wordDict.add("and");
+        wordDict.add("sand");
+        wordDict.add("dog");
         List<String> wb2List = wb2.wordBreak(s,wordDict);
         System.out.println(wb2List);
     }
