@@ -1,9 +1,8 @@
 package com.algorithms.ik.dynamicprogramming;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.algorithms.leetcode.dynamicprogramming.WordBreakII;
+
+import java.util.*;
 
 public class WordBreakCount {
 
@@ -37,44 +36,64 @@ public class WordBreakCount {
                 j--;
             }
         }
-        Counter c = new Counter();
+        System.out.println(startAndEndMap);
+        Long counterValue = 0l;
         if(dp[txt.length()]){
-            countPossibleSegments(txt, 0, startAndEndMap, c);
+            counterValue = countPossibleSegments(txt.length(), startAndEndMap);
+        }else{
+            return 0;
         }
-        Long l = c.counter;
-        Long i = 1000000007l;
-        l = l%i;
-        return l.intValue();
-        //return (c.counter%1000000007).intValue();
+        Long moduloNumber = 1000000007l;
+        counterValue = counterValue % moduloNumber;
+        return counterValue.intValue();
     }
 
     private static void insertInMap(Integer start, Integer end, Map<Integer,List<Integer>> startAndEndMap){
-        List<Integer> list = startAndEndMap.get(start);
+        List<Integer> list = startAndEndMap.get(end);
         if(list == null){
-            startAndEndMap.put(start, new ArrayList<Integer>());
-            list = startAndEndMap.get(start);
+            startAndEndMap.put(end, new ArrayList<Integer>());
+            list = startAndEndMap.get(end);
         }
-        list.add(end);
+        list.add(start);
     }
 
-    private static void countPossibleSegments(String input, Integer startIndex, Map<Integer,List<Integer>> startAndEndMap, Counter c){
-        if(startAndEndMap.get(startIndex) == null){
-            if(startIndex == input.length()) {
-                c.counter++;
-            }
-            return;
-        }else{
-            List<Integer> endIndices = startAndEndMap.get(startIndex);
-            for(Integer endIndex : endIndices){
-                countPossibleSegments(input, endIndex, startAndEndMap, c);
+    private static long countPossibleSegments(Integer endIndex, Map<Integer,List<Integer>> startAndEndMap){
+        Queue<Integer> queue = new LinkedList();
+        Set<Integer> set = new HashSet();
+        set.add(endIndex);
+        queue.add(endIndex);
+        long counter = 0l;
+        while(!queue.isEmpty()){
+            Integer next = queue.poll();
+            List<Integer> startIndices = startAndEndMap.get(next);
+            if(counter == 0 && startIndices.size()>0) counter = 1l;
+            if(startIndices != null) {
+                counter = counter * startIndices.size();
+                for(int startIndex : startIndices) {
+                    if (set.add(startIndex)) queue.addAll(startIndices);
+                }
             }
         }
+        return counter;
     }
 
-    private static class Counter{
-        long counter = 0;
+    public static void main(String[] args){
+        WordBreakCount wbc = new WordBreakCount();
+        String s = "kickstartisawesome";
+        List<String> wordDict = new ArrayList();
+        wordDict.add("kick");
+        wordDict.add("start");
+        wordDict.add("kickstart");
+        wordDict.add("is");
+        wordDict.add("awe");
+        wordDict.add("some");
+        wordDict.add("awesome");
+        int count = wbc.wordBreakCount(wordDict, s);
+        System.out.println(count);
     }
 }
+
+// 18, 14 11, 9, 4 0,
 /*
 Word Break Count
 

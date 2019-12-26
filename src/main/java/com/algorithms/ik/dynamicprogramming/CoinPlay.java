@@ -3,8 +3,28 @@ package com.algorithms.ik.dynamicprogramming;
 public class CoinPlay {
     // Complete the maxWin function below.
     static int maxWin(int[] v) {
+        int[][] game = new int[v.length][v.length];
+        for(int bagsLeft = 1; bagsLeft <= v.length; bagsLeft++){
+            int bagsTaken = v.length - bagsLeft;
+            for(int l = 0; l <= bagsTaken; l++){
+                int r = bagsTaken - l;
+                if(bagsLeft == 1){
+                    game[l][r] = v[l];
+                }else if(bagsLeft == 2){
+                    game[l][r] = Math.max(v[l], v[l+1]);
+                }else{
+                    int gameA = v[l] + Math.min(game[l+2][r], game[l+1][r+1]);
+                    int gameB = v[v.length - r -1] + Math.min(game[l][r+2], game[l+1][r+1]);
+                    game[l][r] = Math.max(gameA, gameB);
+                }
+            }
+        }
+        return game[0][0];
+    }
 
-        return 0;
+    public static void main(String[] args){
+        int[] v = {5, 3, 11, 8};
+        System.out.println(maxWin(v));
     }
 }
 //{5, 3, 11, 8}
