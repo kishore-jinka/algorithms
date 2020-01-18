@@ -33,9 +33,11 @@ public class PartitionEqualSubsetSum {
     }
 
     public static void main(String[] args){
-        int[] nums = {1, 2, 3, 5};
+        int[] nums1 = {1, 5, 11, 5};
+        int[] nums2 = {1, 2, 3, 5};
         PartitionEqualSubsetSum partitionEqualSubsetSum = new PartitionEqualSubsetSum();
-        System.out.println(partitionEqualSubsetSum.canPartition(nums));
+        System.out.println(partitionEqualSubsetSum.canPartition(nums1));
+        System.out.println(partitionEqualSubsetSum.canPartition(nums2));
     }
 }
 
