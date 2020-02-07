@@ -1,5 +1,7 @@
 package com.algorithms.leetcode.sorting;
 
+import java.util.List;
+
 /**
  * 912. Sort an Array
  * https://leetcode.com/problems/sort-an-array/
@@ -38,4 +40,8 @@ public class SortAnArray {
         }
         return merged;
     }
+
+//    public List<Integer> sortArray(int[] nums) {
+//        return null;
+//    }
 }

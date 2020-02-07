@@ -45,11 +45,14 @@ public class KthLargestElementInAnArray {
                 backEndIterator--;
             }
         }
-        if(nums[backEndIterator] < nums[pivotIndex]){
-            int tmp = nums[backEndIterator];
-            nums[backEndIterator] = nums[pivotIndex];
-            nums[pivotIndex] = tmp;
-            pivotIndex = backEndIterator;
+//        if(nums[backEndIterator] < nums[pivotIndex]){
+//            int tmp = nums[backEndIterator];
+//            nums[backEndIterator] = nums[pivotIndex];
+//            nums[pivotIndex] = tmp;
+//            pivotIndex = backEndIterator;
+//        }
+        if(nums[frontEndIterator] > nums[pivotIndex] && frontEndIterator > 0){
+            frontEndIterator--;
         }
         for(int a : nums){
             System.out.print(a);
