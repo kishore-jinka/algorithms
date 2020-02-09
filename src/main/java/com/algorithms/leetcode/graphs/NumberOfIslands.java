@@ -55,7 +55,7 @@ public class NumberOfIslands {
         return neighbors;
     }
 
-    class Coordinates {
+    private class Coordinates {
         int row;
         int column;
         Coordinates(int row, int column){
