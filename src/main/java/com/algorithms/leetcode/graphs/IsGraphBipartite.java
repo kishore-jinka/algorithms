@@ -24,7 +24,7 @@ public class IsGraphBipartite {
         return true;
     }
 
-    public boolean breathFirstSearch(int[][] graph, int[] visited, int vertex){
+    private boolean breathFirstSearch(int[][] graph, int[] visited, int vertex){
         Queue<Integer> queue = new LinkedList();
         queue.add(vertex);
         while(!queue.isEmpty()){
