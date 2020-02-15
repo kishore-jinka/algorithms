@@ -48,7 +48,9 @@ public class CourseScheduleII {
 
     private boolean depthFirstSearch(boolean[] visited, int[] arrived, int[] departed, List<Integer>[] adjacencyLists, int course, TreeMap<Integer, Integer> treeMap){
         if(!visited[course]){
+            //Update visited to true
             visited[course] = true;
+            //Update arrived time for the course
             arrived[course]= time++;
             if(adjacencyLists[course] != null) {
                 for (Integer i : adjacencyLists[course]) {
@@ -57,6 +59,7 @@ public class CourseScheduleII {
                     }
                 }
             }
+            //Update departed time for the course
             departed[course] = time++;
             //Reverse topological sort based on departed times
             treeMap.put(0-departed[course], course);
