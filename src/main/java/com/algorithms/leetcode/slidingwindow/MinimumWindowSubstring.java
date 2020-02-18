@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 76. Minimum Window Substring
  * https://leetcode.com/problems/minimum-window-substring/
- * TODO: INCOMPLETE
+ * //INCOMPLETE - Really really complicated solution (I can't think of a more complex problem than this)
  */
 public class MinimumWindowSubstring {
     public String minWindow(String s, String t) {
@@ -13,6 +13,8 @@ public class MinimumWindowSubstring {
         int rearPointer = 0;
         int minStringStart = 0;
         int minStringEnd = 0;
+        int minDifference = s.length();
+        String minString = s;
         List<Integer> zeroList = new ArrayList();
         zeroList.add(0);
         Map<Character,Integer> characterMap = new HashMap();
@@ -21,7 +23,7 @@ public class MinimumWindowSubstring {
         }
         Set<Character> keySet = characterMap.keySet();
         int missingCharacters = keySet.size();
-        while(rearPointer<s.length() && frontPointer <= s.length()+1){
+        while(rearPointer<s.length() && frontPointer < s.length()){
             if(missingCharacters > 0){
                 Character frontChar = s.charAt(frontPointer);
                 if(keySet.contains(frontChar)){
@@ -35,7 +37,11 @@ public class MinimumWindowSubstring {
                     if(missingCharacters == 0){
                         //if missingCharacters == 0 then update minStringEnd based on length comparision.
                         minStringEnd = frontPointer;
-                        System.out.println(s.substring(minStringStart, minStringEnd+1));
+                        if(minStringEnd - minStringStart < minDifference){
+                            minDifference = minStringEnd - minStringStart;
+                            minString = s.substring(minStringStart, minStringEnd+1);
+                        }
+                        //System.out.println(s.substring(minStringStart, minStringEnd+1));
                     }else {
                         //If atleast one value in character map values is 0 then increment front pointer
                         //missingCharacters > 0
@@ -47,9 +53,9 @@ public class MinimumWindowSubstring {
                 }
             }else{
                 //Character rearChar = s.charAt(rearPointer);
-                if(rearPointer > 0){
+                if(rearPointer > 0) {
                     Character previousRearChar = s.charAt(rearPointer - 1);
-                    if(keySet.contains(previousRearChar)) {
+                    if (keySet.contains(previousRearChar)) {
                         Integer value = characterMap.get(previousRearChar);
                         //Remove from characterMap
                         characterMap.put(previousRearChar, --value);
@@ -60,28 +66,27 @@ public class MinimumWindowSubstring {
                         if (missingCharacters > 0) {
                             //if missingCharacters > 0 then update minStringStart based on length comparision.
                             minStringStart = rearPointer - 1;
-                            System.out.println(s.substring(minStringStart, minStringEnd + 1));
-                        } else {
-                            //If missingCharacters == 0 increment rear pointer
-                            rearPointer++;
+                            if(minStringEnd - minStringStart < minDifference){
+                                minDifference = minStringEnd - minStringStart;
+                                minString = s.substring(minStringStart, minStringEnd+1);
+                            }
+                            //System.out.println(s.substring(minStringStart, minStringEnd + 1));
+                            frontPointer++;
                         }
                     }
-                }else{
-                    //If missingCharacters == 0 increment rear pointer
-                    rearPointer++;
                 }
+                rearPointer++;
             }
-
-            //if all values > 0 then increment rearPointer
-            //
-
         }
-        return "";
+        return minString;
     }
 
+
     public static void main(String[] args){
-        String s = "ADOBECODEBANC";
-        String t = "ABC";
+        //String s = "ADOBECODEBANC";
+        //String t = "ABC";
+        String s = "worolfffffwdrl";
+        String t = "wrl";
         MinimumWindowSubstring mws = new MinimumWindowSubstring();
         System.out.println(mws.minWindow(s,t));
     }
