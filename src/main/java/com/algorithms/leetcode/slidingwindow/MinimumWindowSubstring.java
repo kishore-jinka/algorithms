@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 76. Minimum Window Substring
  * https://leetcode.com/problems/minimum-window-substring/
- * //INCOMPLETE - Really really complicated solution (I can't think of a more complex problem than this)
+ * Really really complex solution (I can't think of a more complex problem than this)
  */
 public class MinimumWindowSubstring {
     public String minWindow(String s, String t) {
@@ -14,79 +14,78 @@ public class MinimumWindowSubstring {
         int minStringStart = 0;
         int minStringEnd = 0;
         int minDifference = s.length();
-        String minString = s;
+        String minString = "";
         List<Integer> zeroList = new ArrayList();
         zeroList.add(0);
-        Map<Character,Integer> characterMap = new HashMap();
+        Map<Character,Integer> tMap = new HashMap();
         for(Character c : t.toCharArray()){
-            characterMap.put(c,0);
+            if(tMap.get(c) == null) tMap.put(c,0);
+            tMap.put(c, tMap.get(c) + 1);
         }
-        Set<Character> keySet = characterMap.keySet();
-        int missingCharacters = keySet.size();
+        Set<Character> keySet = tMap.keySet();
+        Map<Character, Integer> sMap = new HashMap();
+        for(Character c : t.toCharArray()){
+            sMap.put(c,0);
+        }
         while(rearPointer<s.length() && frontPointer < s.length()){
-            if(missingCharacters > 0){
+            if(!areMapsEqual(sMap,tMap)){
                 Character frontChar = s.charAt(frontPointer);
                 if(keySet.contains(frontChar)){
-                    Integer value = characterMap.get(frontChar);
-                    //Insert into characterMap
-                    characterMap.put(frontChar, ++value);
-                    //Decrement missingCharactersSet.
-                    Collection<Integer> values = new HashSet(characterMap.values());
-                    values.retainAll(zeroList);
-                    missingCharacters = values.size();
-                    if(missingCharacters == 0){
-                        //if missingCharacters == 0 then update minStringEnd based on length comparision.
+                    sMap.put(frontChar, sMap.get(frontChar) + 1);
+                    if(areMapsEqual(sMap,tMap)){
                         minStringEnd = frontPointer;
                         if(minStringEnd - minStringStart < minDifference){
                             minDifference = minStringEnd - minStringStart;
                             minString = s.substring(minStringStart, minStringEnd+1);
                         }
-                        //System.out.println(s.substring(minStringStart, minStringEnd+1));
                     }else {
-                        //If atleast one value in character map values is 0 then increment front pointer
-                        //missingCharacters > 0
                         frontPointer++;
                     }
                 }else{
-                    //missingCharacters > 0
                     frontPointer++;
                 }
             }else{
-                //Character rearChar = s.charAt(rearPointer);
                 if(rearPointer > 0) {
                     Character previousRearChar = s.charAt(rearPointer - 1);
                     if (keySet.contains(previousRearChar)) {
-                        Integer value = characterMap.get(previousRearChar);
-                        //Remove from characterMap
-                        characterMap.put(previousRearChar, --value);
-                        //Decrement missingCharactersSet.
-                        Collection<Integer> values = new HashSet(characterMap.values());
-                        values.retainAll(zeroList);
-                        missingCharacters = values.size();
-                        if (missingCharacters > 0) {
-                            //if missingCharacters > 0 then update minStringStart based on length comparision.
+                        sMap.put(previousRearChar, sMap.get(previousRearChar) - 1);
+                        if (!areMapsEqual(sMap,tMap)) {
                             minStringStart = rearPointer - 1;
                             if(minStringEnd - minStringStart < minDifference){
                                 minDifference = minStringEnd - minStringStart;
                                 minString = s.substring(minStringStart, minStringEnd+1);
                             }
-                            //System.out.println(s.substring(minStringStart, minStringEnd + 1));
                             frontPointer++;
+                        }
+
+                    }else{
+                        minStringStart = rearPointer;
+                        if(minStringEnd - minStringStart < minDifference){
+                            minDifference = minStringEnd - minStringStart;
+                            minString = s.substring(minStringStart, minStringEnd+1);
                         }
                     }
                 }
                 rearPointer++;
+
             }
         }
         return minString;
     }
 
+    private boolean areMapsEqual(Map<Character, Integer> sMap, Map<Character, Integer> tMap){
+        for(Iterator<Character> i=sMap.keySet().iterator(); i.hasNext();){
+            Character c = i.next();
+            if(sMap.get(c) < tMap.get(c)) return false;
+        }
+        return true;
+    }
 
     public static void main(String[] args){
         //String s = "ADOBECODEBANC";
-        //String t = "ABC";
-        String s = "worolfffffwdrl";
-        String t = "wrl";
+        //String t = "AABC";
+        String s = "a";
+        String t = "aa";
         MinimumWindowSubstring mws = new MinimumWindowSubstring();
         System.out.println(mws.minWindow(s,t));
     }
