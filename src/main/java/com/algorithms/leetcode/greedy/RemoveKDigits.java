@@ -12,9 +12,17 @@ public class RemoveKDigits {
         String toReturn = null;
         int lowestNumber = 9;
         if(k == 1 && num.length() > 1){
-
-        }
-        if(k < num.length()) {
+            int high = 0;
+            int index = -1;
+            for (int i = 0; i < num.length(); i++) {
+                int digit = Integer.parseInt(num.substring(i, i + 1));
+                if (digit > high){
+                    high = digit;
+                    index = i;
+                }
+            }
+            return num.replaceFirst(String.valueOf(high),"");
+        }else if(k < num.length()) {
             for (int i = 0; i <= k; i++) {
                 int digit = Integer.parseInt(num.substring(i, i + 1));
                 if (digit < lowestNumber) lowestNumber = digit;
@@ -26,8 +34,7 @@ public class RemoveKDigits {
                 if (lowestNumber > 0) toReturn = lowestNumber + toReturn;
             }
             return toReturn;
-        }
-        if(k == num.length()){
+        }else if(k == num.length()){
             for (int i = 0; i < k; i++) {
                 int digit = Integer.parseInt(num.substring(i, i + 1));
                 if (digit < lowestNumber) lowestNumber = digit;
@@ -40,7 +47,7 @@ public class RemoveKDigits {
 
     public static void main(String[] args){
         String num = "10";
-        int k = 2;
+        int k = 1;
         RemoveKDigits removeDigits = new RemoveKDigits();
         System.out.println(removeDigits.removeKdigits(num,k));
     }
