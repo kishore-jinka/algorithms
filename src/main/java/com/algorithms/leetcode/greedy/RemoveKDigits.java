@@ -8,21 +8,30 @@ package com.algorithms.leetcode.greedy;
 public class RemoveKDigits {
     public String removeKdigits(String num, int k) {
         if(k == 0) return num;
-        if(num.length() == 1 && k == 1) return "0";
-        String toReturn = null;
-        int lowestNumber = 9;
-        if(k == 1 && num.length() > 1){
-            int high = 0;
-            int index = -1;
+        String toReturn = "0";
+        if(k >= num.length()) return toReturn;
+        if(k == 1){
+            if(num.length() > 2 && num.charAt(1) == '0') return num.substring(2);
+            int highestNumber = 0;
+            int position = -1;
             for (int i = 0; i < num.length(); i++) {
                 int digit = Integer.parseInt(num.substring(i, i + 1));
-                if (digit > high){
-                    high = digit;
-                    index = i;
+                if (digit > highestNumber){
+                    highestNumber = digit;
+                    position = i;
                 }
             }
-            return num.replaceFirst(String.valueOf(high),"");
-        }else if(k < num.length()) {
+            if(position == num.length() - 1){
+                return num.substring(0, position);
+            }else if(position == 0){
+                return num.substring(1);
+            }else{
+                return num.substring(0,position) + num.substring(position+1);
+            }
+
+        }
+        if(k > 1 && k < num.length()) {
+            int lowestNumber = 9;
             for (int i = 0; i <= k; i++) {
                 int digit = Integer.parseInt(num.substring(i, i + 1));
                 if (digit < lowestNumber) lowestNumber = digit;
@@ -34,20 +43,18 @@ public class RemoveKDigits {
                 if (lowestNumber > 0) toReturn = lowestNumber + toReturn;
             }
             return toReturn;
-        }else if(k == num.length()){
-            for (int i = 0; i < k; i++) {
-                int digit = Integer.parseInt(num.substring(i, i + 1));
-                if (digit < lowestNumber) lowestNumber = digit;
-            }
-            toReturn = String.valueOf(lowestNumber);
-            return toReturn;
         }
+
         return toReturn;
     }
 
+    private String removeLeadingZero(String num){
+
+    }
+
     public static void main(String[] args){
-        String num = "10";
-        int k = 1;
+        String num = "1173";
+        int k = 2;
         RemoveKDigits removeDigits = new RemoveKDigits();
         System.out.println(removeDigits.removeKdigits(num,k));
     }
