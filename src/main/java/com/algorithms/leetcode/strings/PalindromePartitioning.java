@@ -63,7 +63,7 @@ public class PalindromePartitioning {
     }
 
     public static void main(String[] args){
-        String s = "abracadabra";
+        String s = "cbbbcc";
         PalindromePartitioning palindromePartitioning = new PalindromePartitioning();
         List<List<String>> palindromeList = palindromePartitioning.partition(s);
         for(List<String> list : palindromeList){
