@@ -4,6 +4,7 @@ package com.algorithms.leetcode.linkedlists;
 /**
  * 328. Odd Even Linked List
  * https://leetcode.com/problems/odd-even-linked-list/
+ * TODO: INCOMPLETE
  */
 public class OddEvenLinkedList {
     public ListNode oddEvenList(ListNode head) {
@@ -24,7 +25,7 @@ public static void main(String[] args) {
         node3.next = node4;
         node4.next = node5;
 
-//        Main main = new Main();
+//        CourseScheduleII main = new CourseScheduleII();
         ListNode oddEvenList = main.oddEvenList(node1);
 
         while(oddEvenList != null){
