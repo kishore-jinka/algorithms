@@ -3,84 +3,51 @@ package com.algorithms.leetcode.searching;
 /**
  * 215. Kth Largest Element in an Array
  * https://leetcode.com/problems/kth-largest-element-in-an-array/
- * QuickSelect algorithm to find (n-k+1) smallest element
+ * QuickSelect algorithm to find n-k smallest element
  * TODO: INCOMPLETE
  */
 public class KthLargestElementInAnArray {
     public int findKthLargest(int[] nums, int k) {
-        return findMthSmallestQuickSelect(nums, nums.length - k + 1, 0, nums.length-1);
+        return findKthSmallest(nums, nums.length - k , 0, nums.length-1);
     }
 
-    private int findMthSmallestQuickSelect(int[] nums, int m, int start, int end){
-        if(start >= end){
-            return nums[m-1];
-        }
-        int pivotIndex = lomutosParition(nums, start, end);
-        if(pivotIndex == m-1){
-            return nums[m-1];
-        }else if(pivotIndex < m-1){
-            return findMthSmallestQuickSelect(nums, m, pivotIndex+1, end);
-        }else{
-            return findMthSmallestQuickSelect(nums, m, start, pivotIndex-1);
-        }
+    private int findKthSmallest(int[] nums, int k, int start, int end){
+        if(start == end) return nums[k-1];
+        int orangeIndex = findLomutosParitionIndex(nums, start, end);
+        if(orangeIndex < k-1) return findKthSmallest(nums, k, orangeIndex+1, end);
+        if(orangeIndex > k-1) return findKthSmallest(nums, k, start, orangeIndex-1);
+        return nums[k-1];
     }
 
-    private static int lomutosParition(int[] nums, int start, int end){
-        int frontEndIterator = start+1;
-        int backEndIterator = end;
-        int pivotIndex = start;
-        while(frontEndIterator<backEndIterator){
-            if(nums[frontEndIterator]>nums[pivotIndex] && nums[backEndIterator]<=nums[pivotIndex]){
-                int tmp = nums[frontEndIterator];
-                nums[frontEndIterator] = nums[backEndIterator];
-                nums[backEndIterator] = tmp;
-                frontEndIterator++;
-                backEndIterator--;
-            }else if(nums[frontEndIterator]>nums[pivotIndex] && nums[backEndIterator]>nums[pivotIndex]){
-                backEndIterator--;
-            }else if(nums[frontEndIterator]<=nums[pivotIndex] && nums[backEndIterator]<=nums[pivotIndex]){
-                frontEndIterator++;
-            }else if(nums[frontEndIterator]<=nums[pivotIndex] && nums[backEndIterator]>nums[pivotIndex]){
-                frontEndIterator++;
-                backEndIterator--;
+    private int findLomutosParitionIndex(int[] nums, int start, int end){
+        int orangeIndex = -1;
+        int pivot = nums[end];
+        for(int greenIndex = start; greenIndex <= end; greenIndex ++){
+            if(nums[greenIndex] <= pivot){
+                orangeIndex ++;
+                int temp = nums[greenIndex];
+                nums[greenIndex] = nums[orangeIndex];
+                nums[orangeIndex] = temp;
             }
         }
-//        if(nums[backEndIterator] < nums[pivotIndex]){
-//            int tmp = nums[backEndIterator];
-//            nums[backEndIterator] = nums[pivotIndex];
-//            nums[pivotIndex] = tmp;
-//            pivotIndex = backEndIterator;
-//        }
-        if(nums[frontEndIterator] > nums[pivotIndex] && frontEndIterator > 0){
-            frontEndIterator--;
-        }
-        for(int a : nums){
-            System.out.print(a);
-        }
-        System.out.println();
-        System.out.println("frontEndIterator: " + frontEndIterator);
-        System.out.println("backEndIterator: " + backEndIterator);
-        System.out.println("pivotIndex: " + pivotIndex);
-        //if(frontEndIterator==backEndIterator) return backEndIterator - 1;
-        return pivotIndex;
+        return orangeIndex;
     }
 
     public static void main(String[] args){
         //int[] a = {3,1,2,4};
-        int[] a = {3,2,1,5,6,4};
+        //int[] a = {3,2,1,5,6,4};
         //int[] a = {3,2,3,1,2,4,5,5,6};
         //int k = 2;
         //int[] a = {7,6,5,4,3,2,1};
         //2
+        int[] a = {64, 25, 12, 22, 23};
         KthLargestElementInAnArray myClass = new KthLargestElementInAnArray();
-        //System.out.println(myClass.findKthLargest(a, k));
-        System.out.println(lomutosParition(a,0, a.length - 1));
+        System.out.println(myClass.findKthSmallest(a, 4, 0, a.length - 1));
+//        System.out.println(myClass.findLomutosParitionIndex(a,0, a.length - 1));
+//        for(int i : a){
+//            System.out.println(i);
+//        }
     }
 }
 
-
-//for(int a : nums){
-//    System.out.print(a);
-//}
-//System.out.println();
-
+//System.out.println(myClass.findKthLargest(a, k));
