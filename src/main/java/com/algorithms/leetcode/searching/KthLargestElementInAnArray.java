@@ -11,15 +11,16 @@ public class KthLargestElementInAnArray {
         return findKthSmallest(nums, nums.length - k + 1 , 0, nums.length-1);
     }
 
+    //Quick select algorithm - my most favorite *****************
     private int findKthSmallest(int[] nums, int k, int start, int end){
         if(start == end) return nums[k-1];
-        int orangeIndex = findLomutosParitionIndex(nums, start, end);
+        int orangeIndex = findLomutosPartitionIndex(nums, start, end);
         if(orangeIndex < k-1) return findKthSmallest(nums, k, orangeIndex+1, end);
         if(orangeIndex > k-1) return findKthSmallest(nums, k, start, orangeIndex-1);
         return nums[k-1];
     }
 
-    private int findLomutosParitionIndex(int[] nums, int start, int end){
+    private int findLomutosPartitionIndex(int[] nums, int start, int end){
         int orangeIndex = start-1;
         int pivot = nums[end];
         for(int greenIndex = start; greenIndex <= end; greenIndex ++){
@@ -36,7 +37,7 @@ public class KthLargestElementInAnArray {
     public static void main(String[] args){
         int[] a = {64, 25, 12, 22, 23};
         KthLargestElementInAnArray myClass = new KthLargestElementInAnArray();
-        //System.out.println(myClass.findKthSmallest(a, 5, 0, a.length - 1));
-        System.out.println(myClass.findKthLargest(a, 5));
+        //System.out.println(myClass.findKthSmallest(a, 2, 0, a.length - 1));
+        System.out.println(myClass.findKthLargest(a, 4));
     }
 }
