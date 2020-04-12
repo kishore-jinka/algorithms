@@ -1,4 +1,4 @@
-package com.algorithms.leetcode.searching;
+package com.algorithms.leetcode.priorityqueues;
 
 import java.util.PriorityQueue;
 
