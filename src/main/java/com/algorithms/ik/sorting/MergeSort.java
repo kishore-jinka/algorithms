@@ -1,40 +1,58 @@
 package com.algorithms.ik.sorting;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MergeSort {
 
-    private static int[] merge(int[] a, int[] b){
-        int[] merged = new int[a.length + b.length];
-        int i = 0, j = 0, m = 0;
-        while(i<a.length && j<b.length){
-            if(a[i] <= b[j]){
-                merged[m++] = a[i++];
+    public static List<Integer> merge_sort(List<Integer> arr) {
+        return sort(arr, 0, arr.size() -1);
+    }
+
+    private static List<Integer> sort(List<Integer> toSort, int startIndex, int endIndex){
+        if(startIndex < endIndex) {
+            int middle = (startIndex + endIndex) / 2;
+            List<Integer> leftSortedArray = sort(toSort, startIndex, middle);
+            List<Integer> rightSortedArray = sort(toSort, middle + 1, endIndex);
+            return merge(leftSortedArray, rightSortedArray);
+        }
+        return toSort.subList(startIndex, startIndex+1);
+    }
+
+    private static List<Integer> merge(List<Integer> a, List<Integer> b){
+        List<Integer> merged = new ArrayList(a.size() + b.size());
+        int i = 0, j = 0;
+        while(i<a.size() && j<b.size()){
+            if(a.get(i) <= b.get(j)){
+                merged.add(a.get(i));
+                i++;
             } else {
-                merged[m++] = b[j++];
+                merged.add(b.get(j));
+                j++;
             }
         }
-        if(i<a.length){
-            while(i<a.length) merged[m++] = a[i++];
+        if(i<a.size()){
+            while(i<a.size()) {
+                merged.add(a.get(i));
+                i++;
+            }
         }
-        if(j<b.length){
-            while(j<b.length) merged[m++] = b[j++];
+        if(j<b.size()){
+            while(j<b.size()) {
+                merged.add(b.get(j));
+                j++;
+            }
         }
         return merged;
     }
 
-    private static int[] sort(int[] toSort, int startIndex, int endIndex){
-        if(startIndex < endIndex) {
-            int middle = (startIndex + endIndex) / 2;
-            int[] leftSortedArray = sort(toSort, startIndex, middle);
-            int[] rightSortedArray = sort(toSort, middle + 1, endIndex);
-            return merge(leftSortedArray, rightSortedArray);
-        }
-        return new int[]{toSort[startIndex]};
-    }
-
     public static void main(String[] args){
-        int[] toSort = {34, 43, 24, 67, 82, 67, 44, 22, 99, 1, 22};
-        //int[] toSort = {43, 34, 24, 67};
-        int[] sorted = sort(toSort, 0, toSort.length -1);
+        Integer[] toSort = {34, 43, 24, 67, 82, 67, 44, 22, 99, 1, 22};
+        //Integer[] toSort = {4,3,2,1};
+        List<Integer> list = Arrays.asList(toSort);
+        //Integer[] sorted = sort(toSort, 0, toSort.length -1);
+        List<Integer> sorted = merge_sort(list);
         for(int eachInt : sorted) System.out.println(eachInt);
     }
 }
