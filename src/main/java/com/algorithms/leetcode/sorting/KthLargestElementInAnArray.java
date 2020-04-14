@@ -1,4 +1,4 @@
-package com.algorithms.leetcode.searching;
+package com.algorithms.leetcode.sorting;
 
 /**
  * 215. Kth Largest Element in an Array
