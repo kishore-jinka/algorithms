@@ -13,11 +13,11 @@ public class MinimumPathSum {
             for(int column=0; column<grid[0].length; column++){
                 if(row==0 && column==0){
                     minSum[row][column] = grid[0][0];
-                }else if(row == 0 && column > 0 && column <= grid[0].length-1){
+                }else if(row == 0 && column > 0){
                     minSum[row][column] = grid[row][column] + minSum[row][column-1];
-                }else if(row > 0 && row <= grid.length-1 && column == 0){
+                }else if(row > 0 && column == 0){
                     minSum[row][column] = grid[row][column] + minSum[row-1][column];
-                }else if(row > 0 && row <= grid.length-1 && column > 0 && column <= grid[0].length-1){
+                }else if(row > 0 && column > 0){
                     minSum[row][column] = grid[row][column] + Math.min(minSum[row][column-1], minSum[row-1][column]);
                 }
             }
