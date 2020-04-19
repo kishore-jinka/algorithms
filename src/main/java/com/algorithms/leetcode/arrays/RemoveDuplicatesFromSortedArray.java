@@ -4,6 +4,7 @@ package com.algorithms.leetcode.arrays;
  * 26. Remove Duplicates from Sorted Array
  * https://leetcode.com/problems/remove-duplicates-from-sorted-array/
  * https://leetcode.com/explore/featured/card/fun-with-arrays/526/deleting-items-from-an-array/3248/
+ * https://leetcode.com/explore/learn/card/fun-with-arrays/511/in-place-operations/3258/
  */
 public class RemoveDuplicatesFromSortedArray {
     public int removeDuplicates(int[] nums) {

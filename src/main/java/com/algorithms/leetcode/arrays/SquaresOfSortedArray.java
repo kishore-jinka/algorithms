@@ -6,6 +6,7 @@ import java.util.Arrays;
  * 977. Squares of a Sorted Array
  * https://leetcode.com/problems/squares-of-a-sorted-array/
  * https://leetcode.com/explore/learn/card/fun-with-arrays/521/introduction/3240/
+ * https://leetcode.com/explore/learn/card/fun-with-arrays/511/in-place-operations/3261/
  */
 public class SquaresOfSortedArray {
 

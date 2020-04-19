@@ -1,9 +1,10 @@
-package com.algorithms.leetcode.sorting;
+package com.algorithms.leetcode.arrays;
 
 /**
  * 283. Move Zeroes
  * https://leetcode.com/problems/move-zeroes/
  * https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/528/week-1/3286/
+ * https://leetcode.com/explore/learn/card/fun-with-arrays/511/in-place-operations/3157/
  */
 public class MoveZeroes {
 
