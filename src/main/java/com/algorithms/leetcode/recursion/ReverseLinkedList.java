@@ -1,6 +1,11 @@
 package com.algorithms.leetcode.recursion;
 
 
+/**
+ * 206. Reverse Linked List
+ * https://leetcode.com/problems/reverse-linked-list/
+ * https://leetcode.com/explore/learn/card/linked-list/219/classic-problems/1205/
+ */
 public class ReverseLinkedList {
     public ListNode reverseList(ListNode head) {
         if(head == null) return null;
