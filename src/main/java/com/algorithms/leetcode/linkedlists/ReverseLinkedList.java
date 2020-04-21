@@ -1,5 +1,4 @@
-package com.algorithms.leetcode.recursion;
-
+package com.algorithms.leetcode.linkedlists;
 
 /**
  * 206. Reverse Linked List
