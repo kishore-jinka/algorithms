@@ -1,6 +1,10 @@
-package com.algorithms.leetcode.recursion;
+package com.algorithms.leetcode.linkedlists;
 
-public class SwapLinkedListNodePairs {
+/**
+ * 24. Swap Nodes in Pairs
+ * https://leetcode.com/problems/swap-nodes-in-pairs/
+ */
+public class SwapNodesInPairs {
     public ListNode swapPairs(ListNode head) {
         if(head != null && head.next != null){
             ListNode node1 = head;
@@ -21,7 +25,7 @@ public class SwapLinkedListNodePairs {
         listNode1.next = listNode2;
         listNode2.next = listNode3;
         listNode3.next = listNode4;
-        SwapLinkedListNodePairs swapLinkedListNodePairs = new SwapLinkedListNodePairs();
+        SwapNodesInPairs swapLinkedListNodePairs = new SwapNodesInPairs();
         ListNode swappedPairsLL = swapLinkedListNodePairs.swapPairs(listNode1);
         ListNode currentNode = swappedPairsLL;
         while(currentNode != null){

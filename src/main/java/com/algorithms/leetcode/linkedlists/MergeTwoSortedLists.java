@@ -1,7 +1,10 @@
-package com.algorithms.leetcode.recursion;
+package com.algorithms.leetcode.linkedlists;
 
-
-//Incomplete
+/**
+ * 21. Merge Two Sorted Lists
+ * https://leetcode.com/problems/merge-two-sorted-lists/
+ * https://leetcode.com/explore/learn/card/linked-list/213/conclusion/1227/
+ */
 public class MergeTwoSortedLists {
 
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
@@ -61,12 +64,3 @@ public class MergeTwoSortedLists {
 
     }
 }
-
-/*
-Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
-
-Example:
-
-Input: 1->2->4, 1->3->4
-Output: 1->1->2->3->4->4
- */
