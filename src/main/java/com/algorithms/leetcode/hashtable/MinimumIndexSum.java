@@ -23,7 +23,6 @@ public class MinimumIndexSum {
             c.value1 = i+1;
             map.put(list1[i], c);
         }
-        List<String> list = new ArrayList();
         for(int i=0; i<list2.length; i++){
             Couple c = map.get(list2[i]);
             if(c == null) c = new Couple();
