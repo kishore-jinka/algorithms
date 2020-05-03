@@ -9,7 +9,6 @@ import java.util.Map;
  * 249. Group Shifted Strings
  * https://leetcode.com/problems/group-shifted-strings/
  * https://leetcode.com/explore/learn/card/hash-table/185/hash_table_design_the_key/1125/
- * Java is always slow when we do
  */
 public class GroupShiftedStrings {
     public List<List<String>> groupStrings(String[] strings) {
