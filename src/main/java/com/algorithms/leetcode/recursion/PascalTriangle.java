@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 118. Pascal's Triangle
+ * https://leetcode.com/problems/pascals-triangle/
+ */
 public class PascalTriangle {
 
     public List<List<Integer>> generate(int numRows) {
