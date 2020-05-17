@@ -31,7 +31,7 @@ public class NQueens {
     }
 
     private boolean arePositionsGood(List<Integer> intPositions){
-        if(intPositions.size() < 2) return true;
+        if(intPositions.size() == 1) return true;
         for(int i=0; i<intPositions.size(); i++){
             for(int j=i+1; j<intPositions.size(); j++){
                 if(intPositions.get(i) == intPositions.get(j)) return false;
