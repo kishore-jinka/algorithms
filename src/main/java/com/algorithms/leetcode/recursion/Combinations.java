@@ -1,4 +1,4 @@
-package com.algorithms.leetcode.hashtable;
+package com.algorithms.leetcode.recursion;
 
 import java.util.ArrayList;
 import java.util.List;
