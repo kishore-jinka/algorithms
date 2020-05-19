@@ -3,6 +3,11 @@ package com.algorithms.leetcode.recursion;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 52. N-Queens II
+ * https://leetcode.com/problems/n-queens-ii/
+ * https://leetcode.com/explore/learn/card/recursion-ii/472/backtracking/2804/
+ */
 public class NQueensII {
     public int totalNQueens(int n) {
         Counter counter = new Counter();
