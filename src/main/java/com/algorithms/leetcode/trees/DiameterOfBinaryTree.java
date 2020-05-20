@@ -3,6 +3,7 @@ package com.algorithms.leetcode.trees;
 /**
  * 543. Diameter of Binary Tree
  * https://leetcode.com/problems/diameter-of-binary-tree/
+ * TODO: Correct the following wrong solution
  */
 public class DiameterOfBinaryTree {
     public int diameterOfBinaryTree(TreeNode root) {
