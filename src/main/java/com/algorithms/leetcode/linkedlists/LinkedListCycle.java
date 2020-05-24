@@ -15,8 +15,8 @@ public class LinkedListCycle {
             tortoise = tortoise.next;
             if(hare == null){
                 break;
-            }else{
-                if(hare.val == tortoise.val) return true;
+            }else if(hare.val == tortoise.val){
+                return true;
             }
         }
         return false;
