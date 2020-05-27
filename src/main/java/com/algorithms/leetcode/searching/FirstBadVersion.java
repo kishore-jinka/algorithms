@@ -1,4 +1,4 @@
-package com.algorithms.leetcode.recursion;
+package com.algorithms.leetcode.searching;
 
 /**
  * 278. First Bad Version
