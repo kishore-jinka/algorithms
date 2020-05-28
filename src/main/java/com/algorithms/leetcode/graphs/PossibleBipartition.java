@@ -22,9 +22,6 @@ public class PossibleBipartition {
             if(graph[dislikes[i][1] - 1] == null) graph[dislikes[i][1]-1] = new ArrayList();
             graph[dislikes[i][1] - 1].add(dislikes[i][0]);
         }
-//        for(int i=0; i<N; i++){
-//            System.out.println("graph["+(i+1)+"] = " + graph[i]);
-//        }
         return isBipartite(N, graph);
     }
 
@@ -34,16 +31,10 @@ public class PossibleBipartition {
             if(visited[i-1] == 0){
                 boolean isBipartite = breathFirstSearch(graph, visited, i);
                 if(!isBipartite){
-//                    for(int j=0; j<visited.length; j++){
-//                        System.out.println("visited["+(j+1)+"] = " + visited[j]);
-//                    }
                     return false;
                 }
             }
         }
-//        for(int j=0; j<visited.length; j++){
-//            System.out.println("visited["+(j+1)+"] = " + visited[j]);
-//        }
         return true;
     }
 
