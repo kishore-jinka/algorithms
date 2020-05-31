@@ -4,21 +4,18 @@ package com.algorithms.leetcode.searching;
  * 278. First Bad Version
  * https://leetcode.com/problems/first-bad-version/
  * https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3316/
- * Binary Search Variant
  */
 public class FirstBadVersion extends VersionControl{
     public int firstBadVersion(int n) {
-        return getBadVersionRecursive(1, n);
-    }
-
-    private int getBadVersionRecursive(int start, int end){
-        if(start < end){
+        int start = 1;
+        int end = n;
+        while(start < end){
             int mid = start/2 + end/2;
             if(start%2 == 1 && end%2 == 1) mid = mid + 1;
             if(isBadVersion(mid)){ // bad version is between start and mid
-                return getBadVersionRecursive(start, mid);
+                end = mid;
             }else{ // bad version is between mid and end
-                return getBadVersionRecursive(mid+1, end);
+                start = mid+1;
             }
         }
         return start;
