@@ -1,13 +1,11 @@
 package com.algorithms.leetcode.queues;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Moving Average from Data Stream
- *
+ * 346. Moving Average from Data Stream
+ * https://leetcode.com/problems/moving-average-from-data-stream/
  * https://leetcode.com/explore/learn/card/queue-stack/228/first-in-first-out-data-structure/1368/
  */
 public class MovingAverage {

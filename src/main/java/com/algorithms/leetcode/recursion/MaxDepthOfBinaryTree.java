@@ -2,6 +2,10 @@ package com.algorithms.leetcode.recursion;
 
 import com.algorithms.leetcode.trees.TreeNode;
 
+/**
+ * 104. Maximum Depth of Binary Tree
+ * https://leetcode.com/problems/maximum-depth-of-binary-tree/
+ */
 public class MaxDepthOfBinaryTree {
     public int maxDepth(TreeNode root) {
         if(root == null) return 0;

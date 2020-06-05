@@ -1,7 +1,5 @@
 package com.algorithms.leetcode.arrays;
 
-import com.algorithms.leetcode.strings.ValidParenthesisString;
-
 /**
  * 941. Valid Mountain Array
  * https://leetcode.com/problems/valid-mountain-array/
