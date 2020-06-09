@@ -9,9 +9,9 @@ public class SearchInSortedArray {
         int start = 0;
         int end = 1;
         while(reader.get(end) < target){
-            start = end;
             end = end * 2;
         }
+        start = end/2;
         while(start <= end){
             int mid = start + (end - start)/2;
             if(reader.get(mid) == target) return mid;
