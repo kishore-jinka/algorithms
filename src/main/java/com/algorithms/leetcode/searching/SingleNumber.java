@@ -1,9 +1,10 @@
-package com.algorithms.leetcode.arrays;
+package com.algorithms.leetcode.searching;
 
 /**
  * 136. Single Number
  * https://leetcode.com/problems/single-number/
  * https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/528/week-1/3283/
+ * TODO: INCOMPLETE
  */
 public class SingleNumber {
     public int singleNumber(int[] nums) {
