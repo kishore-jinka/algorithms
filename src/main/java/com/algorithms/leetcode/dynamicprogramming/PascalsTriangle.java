@@ -1,15 +1,40 @@
-package com.algorithms.leetcode.recursion;
+package com.algorithms.leetcode.dynamicprogramming;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * 118. Pascal's Triangle
  * https://leetcode.com/problems/pascals-triangle/
  */
-public class PascalTriangle {
+public class PascalsTriangle {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> dp = new ArrayList<List<Integer>>();
+        for(int row=0; row<numRows; row++){
+            dp.add(new ArrayList());
+            for(int column=0; column<row+1; column++){
+                if(column == 0 || column == row){
+                    dp.get(row).add(1);
+                }else{
+                    int sum = dp.get(row-1).get(column) + dp.get(row-1).get(column-1);
+                    dp.get(row).add(sum);
+                }
+            }
+        }
+        return dp;
+    }
 
+    public static void main(String[] args){
+        PascalsTriangle pt = new PascalsTriangle();
+        List<List<Integer>> lists = pt.generate(5);
+        for(List list : lists){
+            System.out.println(list);
+        }
+    }
+}
+
+/*
+    //USING RECURSION
     public List<List<Integer>> generate(int numRows) {
         if(numRows < 1) return new ArrayList<List<Integer>>();
         Integer[] array1 = {1};
@@ -45,18 +70,4 @@ public class PascalTriangle {
             System.out.println(list);
         }
     }
-}
-
-/*
-Example:
-
-Input: 5
-Output:
-[
-     [1],
-    [1,1],
-   [1,2,1],
-  [1,3,3,1],
- [1,4,6,4,1]
-]
  */
