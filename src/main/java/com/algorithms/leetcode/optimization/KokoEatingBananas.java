@@ -1,4 +1,4 @@
-package com.algorithms.leetcode.searching;
+package com.algorithms.leetcode.optimization;
 
 /**
  * Koko Eating Bananas

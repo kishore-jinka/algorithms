@@ -1,4 +1,4 @@
-package com.algorithms.leetcode.searching;
+package com.algorithms.leetcode.optimization;
 
 /**
  * 774. Minimize Max Distance to Gas Station
