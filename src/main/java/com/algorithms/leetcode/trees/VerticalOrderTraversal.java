@@ -4,43 +4,66 @@ package com.algorithms.leetcode.trees;
 import java.util.*;
 
 /**
- *  314. Binary Tree Vertical Order Traversal TODO: INCOMPLETE
+ *  314. Binary Tree Vertical Order Traversal
  *  https://leetcode.com/problems/binary-tree-vertical-order-traversal/
  */
 public class VerticalOrderTraversal {
     public List<List<Integer>> verticalOrder(TreeNode root) {
-        Map<Integer,Map<Integer, List<Integer>>> verticalOrderMap = new TreeMap();
-        if(root == null) return null;
-        traverseVerticalOrderRecursive(root, verticalOrderMap, 0, 0);
-        Iterator<Integer> horizontalIterator = verticalOrderMap.keySet().iterator();
-        List<List<Integer>> verticalOrderList = new ArrayList();
-//        while(horizontalIterator.hasNext()) {
-//            verticalOrderList.add(verticalOrderMap.get(horizontalIterator.next()));
-//        }
-//        return verticalOrderList;
-        return null;
+        List<List<Integer>> finalList = new ArrayList<List<Integer>>();
+        if(root == null) return finalList;
+        Queue<QueueNode> queue = new LinkedList<QueueNode>();
+        List<List<Integer>> negativeList = new ArrayList<List<Integer>>();
+        List<List<Integer>> positiveList = new ArrayList<List<Integer>>();
+        List<Integer> zeroList = new LinkedList();
+        QueueNode rootQNode = new QueueNode(root, 0);
+        queue.add(rootQNode);
+        while(!queue.isEmpty()){
+            int numberOfNodes = queue.size();
+            for(int i=0; i<numberOfNodes; i++){
+                QueueNode qNode = queue.poll();
+                if(qNode.rank == 0){
+                    zeroList.add(qNode.node.val);
+                }else if(qNode.rank > 0){
+                    int position = qNode.rank - 1;
+                    if(position == positiveList.size()) positiveList.add(position, new LinkedList<Integer>());
+                    positiveList.get(position).add(qNode.node.val);
+                }else if(qNode.rank < 0){
+                    int position = Math.abs(qNode.rank) - 1;
+                    if(position == negativeList.size()) negativeList.add(position, new LinkedList<Integer>());
+                    negativeList.get(position).add(qNode.node.val);
+                }
+                if(qNode.node.left != null) queue.add(new QueueNode(qNode.node.left, qNode.rank - 1));
+                if(qNode.node.right != null) queue.add(new QueueNode(qNode.node.right, qNode.rank + 1));
+            }
+        }
+
+        for(int i=negativeList.size() - 1; i>-1; i--){
+            finalList.add(negativeList.get(i));
+        }
+        finalList.add(zeroList);
+        for(int i=0; i<positiveList.size(); i++){
+            finalList.add(positiveList.get(i));
+        }
+        return finalList;
     }
 
-    private void traverseVerticalOrderRecursive(TreeNode root, Map<Integer,Map<Integer, List<Integer>>> verticalOrderMap, int horizontalIndex, int verticleIndex){
-        //process left node
-        if(root.left != null) traverseVerticalOrderRecursive(root.left, verticalOrderMap, horizontalIndex-1, verticleIndex+1);
-
-        //process root
-        Map<Integer, List<Integer>> verticalListMap = verticalOrderMap.get(horizontalIndex);
-        if(verticalListMap == null){
-            verticalListMap = new TreeMap<Integer, List<Integer>>();
-            verticalOrderMap.put(horizontalIndex,verticalListMap);
+    private class QueueNode{
+        TreeNode node;
+        int rank;
+        QueueNode(TreeNode node, int rank){
+            this.node = node;
+            this.rank = rank;
         }
-        List<Integer> horizontalList = verticalListMap.get(verticleIndex);
-        if(horizontalList == null){
-            horizontalList = new ArrayList<Integer>();
-            verticalListMap.put(verticleIndex, horizontalList);
-        }
-        horizontalList.add(root.val);
 
-        //process right node
-        if(root.right != null) traverseVerticalOrderRecursive(root.right, verticalOrderMap, horizontalIndex+1, verticleIndex+1);
+        public TreeNode getNode(){
+            return node;
+        }
+
+        public int getRank(){
+            return rank;
+        }
     }
+
 
     public static void main(String[] args){
         TreeNode node2 = new TreeNode(2);
