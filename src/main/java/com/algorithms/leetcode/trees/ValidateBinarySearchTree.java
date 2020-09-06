@@ -26,6 +26,7 @@ public class ValidateBinarySearchTree {
         if(root.right != null) inOrderTraversalRecursive(root.right, inOrderedList);
     }
 
+
     public static void main(String[] args){
         TreeNode node2 = new TreeNode(2);
         TreeNode node1 = new TreeNode(1);
@@ -45,6 +46,58 @@ public class ValidateBinarySearchTree {
     }
 
 }
+
+//TODO: Improve on this
+/*
+    private boolean isBstGlobal = true;
+    public boolean isValidBST(TreeNode root) {
+        if(root == null) return true;
+        dfs(root);
+        return isBstGlobal;
+    }
+
+    private Combo dfs(TreeNode node){
+        int smallest = node.val;
+        int largest = node.val;
+        boolean isBst = true;
+        if(node.left == null && node.right == null) return new Combo(smallest, largest, isBst);
+        if(node.left != null){
+            Combo combo = dfs(node.left);
+            smallest = Math.max(smallest, combo.getSmallest());
+            largest = Math.max(largest, combo.getLargest());
+            if(!combo.isBst || combo.largest >= node.val) isBst = false;
+        }
+        if(node.right != null){
+            Combo combo = dfs(node.right);
+            smallest = Math.max(smallest, combo.getSmallest());
+            largest = Math.max(largest, combo.getLargest());
+            if(!combo.isBst || combo.smallest <= node.val) isBst = false;
+        }
+        if(!isBst) isBstGlobal = false;
+        return new Combo(smallest, largest, isBst);
+    }
+
+    private class Combo{
+        int smallest;
+        int largest;
+        boolean isBst;
+        Combo(int smallest, int largest, boolean isBst){
+            this.smallest = smallest;
+            this.largest = largest;
+            this.isBst = isBst;
+        }
+        int getSmallest(){
+            return smallest;
+        }
+        int getLargest(){
+            return largest;
+        }
+        boolean getIsBst(){
+            return isBst;
+        }
+    }
+
+ */
 
 /*
     //LeetCode passes 68/75 cases.  Something is wrong with the below code or LeetCode?
