@@ -24,7 +24,7 @@ public class RegularExpressionMatching {
 
     public static void main(String[] args){
         String input = "aa";
-        String regex = "a*c";
+        String regex = "a*";
         RegularExpressionMatching rem = new RegularExpressionMatching();
         System.out.println(rem.isMatch(input, regex));
     }
