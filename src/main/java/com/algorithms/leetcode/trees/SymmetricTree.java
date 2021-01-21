@@ -7,41 +7,21 @@ import java.util.*;
  * https://leetcode.com/problems/symmetric-tree/
  */
 public class SymmetricTree {
+
     public boolean isSymmetric(TreeNode root) {
-        if(root == null){
+        if(root == null) return true;
+        return isSymmetricRecursive(root.left, root.right);
+    }
+
+    private boolean isSymmetricRecursive(TreeNode p, TreeNode q){
+        if(p == null && q == null){
             return true;
-        }else if(root.left == null & root.right == null){
-            return true;
+        }else if(p == null || q == null){
+            return false;
         }
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
-        queue.add(root);
-        TreeNode minNode = new TreeNode(Integer.MIN_VALUE);
-        while(!queue.isEmpty()){
-            int numberOfNodes = queue.size();
-            boolean nextRowIsNull = true;
-            for(int i=0; i<numberOfNodes; i++){
-                TreeNode node = queue.poll();
-                if(node.left == null){
-                    queue.add(minNode);
-                }else{
-                    queue.add(node.left);
-                    nextRowIsNull = false;
-                }
-                if(node.right == null){
-                    queue.add(minNode);
-                }else{
-                    queue.add(node.right);
-                    nextRowIsNull = false;
-                }
-            }
-            List<TreeNode> list = new ArrayList<TreeNode>();
-            list.addAll(queue);
-            for(int i=0; i<list.size()/2; i++){
-                if(list.get(i).val != list.get(list.size() - i - 1).val) return false;
-            }
-            if(nextRowIsNull) break;
-        }
-        return true;
+        return p.val == q.val
+                && isSymmetricRecursive(p.left, q.right)
+                && isSymmetricRecursive(p.right, q.left);
     }
 
     public static void main(String[] args){
@@ -57,8 +37,9 @@ public class SymmetricTree {
         node2_1.left = node3_1;
         node2_1.right = node4_1;
         node2_2.left = node4_2;
-        //node2_2.right = node3_2;
+        node2_2.right = node3_2;
         SymmetricTree symmetricTree = new SymmetricTree();
         System.out.println(symmetricTree.isSymmetric(node1));
     }
 }
+
