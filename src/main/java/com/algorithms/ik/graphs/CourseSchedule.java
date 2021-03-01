@@ -15,7 +15,7 @@ import java.util.TreeMap;
  */
 public class CourseSchedule {
 
-    private static int time = 0;
+    private static int time = 1;
     static List<Integer> course_schedule(int n, List<List<Integer>> prerequisites) {
         List<Integer> toReturn = new ArrayList();
         //If no prerequisites are present - return the courses array in any order
@@ -76,5 +76,19 @@ public class CourseSchedule {
             return false;
         }
         return true;
+    }
+
+    public static void main(String[] args){
+        List<List<Integer>> prerequisites = new ArrayList();
+        List<Integer> list0 = new ArrayList();
+        list0.add(0);
+        list0.add(1);
+        prerequisites.add(list0);
+        List<Integer> list1 = new ArrayList();
+        list1.add(1);
+        list1.add(0);
+        prerequisites.add(list1);
+        List<Integer> output = course_schedule(2, prerequisites);
+        System.out.println(output);
     }
 }

@@ -1,7 +1,6 @@
 package com.algorithms.ik.sorting;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class LexicographicalOrder {
     /*

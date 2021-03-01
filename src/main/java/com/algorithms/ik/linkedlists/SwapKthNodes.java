@@ -1,7 +1,5 @@
 package com.algorithms.ik.linkedlists;
 
-import java.util.LinkedHashSet;
-
 public class SwapKthNodes {
     static LinkedListNode swap_nodes(LinkedListNode head, int k) {
         if(head == null) return null;
